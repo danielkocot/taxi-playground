@@ -1,0 +1,25 @@
+namespace de.codecentric
+
+type CustomerId inherits String
+type FirstName inherits String
+type LastName inherits String
+type Email inherits String
+type PhoneNumber inherits String
+
+model Customer {
+    id: CustomerId
+    firstName: FirstName
+    lastName: LastName
+    email: Email
+    phoneNumber: PhoneNumber
+}
+
+@HttpService(baseUrl = "http://api.codecentric.de")
+service CustomerService {
+    @HttpOperation(method = "GET", url = "/customers")
+    operation getAllCustomers(): Customer[]
+
+    @HttpOperation(method = "GET", url = "/customers/{id}")
+    operation getCustomerById(id: CustomerId): Customer
+
+}
